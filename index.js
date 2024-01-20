@@ -1,34 +1,24 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
-require("dotenv").config()
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
 
-const app = express()
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const Despesa = require('./models/despesa')
+console.log('String de Conexão MongoDB:', process.env.MONGO_URI);
 
-const requestLogger = (request, response, next) => {
-	console.log("Method:", request.method);
-	console.log("Path:  ", request.path);
-	console.log("Body:  ", request.body);
-	console.log("---");
-	next();
-};
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Conectado ao MongoDB');
+  })
+  .catch((err) => {
+    console.error('Erro ao conectar ao MongoDB:', err);
+  });
 
-const errorHandler = (error, request, response, next) => {
-	console.error(error.message);
+app.get('/', (req, res) => {
+  res.send('Bem-vindo à minha aplicação com MongoDB!');
+});
 
-	if (error.name === "CastError") {
-		return response.status(400).send({ error: "malformatted id" });
-	}
-
-	next(error);
-};
-
-const unknownEndpoint = (request, response) => {
-	response.status(404).send({ error: "unknown endpoint" });
-};
-
-app.use(cors());
-app.use(express.json());
-app.use(requestLogger);
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
