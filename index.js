@@ -23,8 +23,6 @@ mongoose
 		console.error('Erro ao conectar ao MongoDB:', err)
 	})
 
-
-
 // Rota para obter todas as despesas
 app.get('/api/despesas', async (request, response) => {
 	try {
@@ -45,5 +43,5 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+	console.log(`Server running on port ${PORT}`)
 })
