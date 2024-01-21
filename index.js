@@ -41,6 +41,7 @@ app.get('/', (req, res) => {
 	res.send('Bem-vindo à minha aplicação com MongoDB!')
 })
 
+
 app.listen(config.PORT, () => {
 	logger.info(`Server running on port ${config.PORT}`)
   })
