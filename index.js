@@ -41,8 +41,6 @@ app.get('/', (req, res) => {
 	res.send('Bem-vindo à minha aplicação com MongoDB!')
 })
 
-const PORT = process.env.PORT || 3000
-
 app.listen(config.PORT, () => {
 	logger.info(`Server running on port ${config.PORT}`)
   })
