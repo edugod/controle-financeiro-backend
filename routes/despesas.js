@@ -35,4 +35,18 @@ router.post('/', async (request, response) => {
   }
 });
 
+router.delete('/:despesaId', async (req, res) => {
+  try {
+    const despesaId = req.params.despesaId;
+
+    // Execute a lógica para excluir a despesa no banco de dados
+    await Despesa.findByIdAndDelete(despesaId);
+
+    res.status(200).json({ message: 'Despesa excluída com sucesso' });
+  } catch (error) {
+    console.error('Erro ao excluir despesa:', error);
+    res.status(500).json({ error: 'Erro ao excluir despesa' });
+  }
+});
+
 module.exports = router;
