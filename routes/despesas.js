@@ -18,6 +18,7 @@ router.get('/', async (request, response) => {
 // Rota para criar uma nova despesa
 router.post('/', async (request, response) => {
   try {
+    console.log(request.body)
     const novaDespesa = new Despesa({
       dia: request.body.dia,
       valor: request.body.valor,
