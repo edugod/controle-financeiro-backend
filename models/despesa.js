@@ -1,16 +1,19 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const despesaSchema = new mongoose.Schema({
-	dia: { type: Date, required: true },
-	valor: { type: Number, required: true },
-	observacao: { type: String },
-})
-despesaSchema.set('toJSON', {
-	transform: (document, returnedObject) => {
-		returnedObject.id = returnedObject._id.toString()
-		delete returnedObject._id
-		delete returnedObject.__v
-	},
-})
+  dia: { type: Date, required: true },
+  valor: { type: Number, required: true },
+  observacao: { type: String },
+});
 
-module.exports = mongoose.model('Despesa', despesaSchema)
+// Definir o formato desejado ao serializar para JSON
+despesaSchema.set('toJSON', {
+  transform: function (doc, ret) {
+    ret.dia = ret.dia.toLocaleDateString(); // Ajuste para formatar como DD/MM/YYYY
+    ret.id = ret._id.toString();
+    delete ret._id;
+    delete ret.__v;
+  },
+});
+
+module.exports = mongoose.model('Despesa', despesaSchema);
