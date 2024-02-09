@@ -18,4 +18,3 @@ despesaSchema.set('toJSON', {
 })
 
 module.exports = mongoose.model('Despesa', despesaSchema)
-quero ver eu me lembrar xD
