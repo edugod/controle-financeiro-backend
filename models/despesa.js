@@ -4,6 +4,7 @@ const despesaSchema = new mongoose.Schema({
 	dia: { type: String, required: true },
 	valor: { type: Number, required: true },
 	observacao: { type: String },
+	categoria: { type: String}
 })
 
 // Definir o formato desejado ao serializar para JSON
