@@ -19,5 +19,3 @@ despesaSchema.set('toJSON', {
 })
 
 module.exports = mongoose.model('Despesa', despesaSchema)
-
-ntestando a minha escrita com esse espaço ruim, masa gora volta a funcionar.
