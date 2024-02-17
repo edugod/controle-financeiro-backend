@@ -6,6 +6,7 @@ const config = require('./utils/config');
 const logger = require('./utils/logger');
 const { requestLogger, unknownEndpoint, errorHandler } = require('./utils/middleware');
 const despesaRouter = require('./routes/despesas');
+const usersRouter = require('./routes/users')
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.get('/', (req, res) => {
 
 // Rotas
 app.use('/api/despesas', despesaRouter);
+app.use('/api/users', usersRouter)
 
 // Middlewares de erro
 app.use(unknownEndpoint);
