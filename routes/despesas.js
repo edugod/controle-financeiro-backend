@@ -1,12 +1,13 @@
 const express = require('express');
 const Despesa = require('../models/despesa');
+const User = require('../models/user')
 
 const router = express.Router();
 
 // Rota para obter todas as despesas
 router.get('/', async (request, response) => {
   try {
-    const despesas = await Despesa.find({});
+    const despesas = await Despesa.find({})
     response.setHeader('Content-Type', 'application/json');
     response.json(despesas);
   } catch (error) {
@@ -17,13 +18,19 @@ router.get('/', async (request, response) => {
 
 // Rota para criar uma nova despesa
 router.post('/', async (request, response) => {
+
+
+  const user = await User.findById(request.body.userId)
+  console.log('user :>> ', user);
+
   try {
     console.log(request.body)
     const novaDespesa = new Despesa({
       dia: request.body.dia,
       valor: request.body.valor,
       observacao: request.body.observacao,
-      categoria: request.body.categoria
+      categoria: request.body.categoria,
+      user: user.id
     });
 
     // Salvar a nova despesa no banco de dados
