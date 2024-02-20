@@ -1,6 +1,5 @@
 const express = require('express');
 const Despesa = require('../models/despesa');
-const User = require('../models/user')
 
 const router = express.Router();
 
@@ -19,10 +18,6 @@ router.get('/', async (request, response) => {
 // Rota para criar uma nova despesa
 router.post('/', async (request, response) => {
 
-
-  const user = await User.findById(request.body.userId)
-  console.log('user :>> ', user);
-
   try {
     console.log(request.body)
     const novaDespesa = new Despesa({
@@ -30,7 +25,6 @@ router.post('/', async (request, response) => {
       valor: request.body.valor,
       observacao: request.body.observacao,
       categoria: request.body.categoria,
-      user: user.id
     });
 
     // Salvar a nova despesa no banco de dados
