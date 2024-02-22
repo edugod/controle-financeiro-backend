@@ -4,6 +4,18 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+// Rota para eu conseguir enxergar todos os usuários
+
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find({})
+    res.status(200).json(users)
+  } catch (error) {
+    console.log('erro ao buscar usuários:', error)
+    res.status(500).json({ error: 'Houve um erro ao tentar buscar os usuários'})
+  }
+})
+
 // Rota para registrar um novo usuário
 router.post('/register', async (req, res) => {
   try {
@@ -50,6 +62,18 @@ router.get('/me', async (req, res) => {
     res.status(401).json({ error: 'Token inválido' });
   }
 });
+
+//Rota para limpar todos os usuários registrados
+//precisa ser pelo postman, pois em site ele só faz HTTP GET.
+router.delete('/clear', async (req, res) => {
+  try {
+    await User.deleteMany({})
+    res.status(200).json({ message: 'Usuários apagados do banco de dados com sucesso!'})
+  } catch (error) {
+    console.log('erro ao limpar os usuários do banco de dado', error)
+    res.status(500).json({error: 'Erro ao tentar limpar os usuários'})
+  }
+})
 
 module.exports = router;
 

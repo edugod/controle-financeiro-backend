@@ -4,7 +4,11 @@ const despesaSchema = new mongoose.Schema({
 	dia: { type: String, required: true },
 	valor: { type: Number, required: true },
 	observacao: { type: String },
-	categoria: { type: String}
+	categoria: { type: String},
+	createdBy: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	}
 })
 
 // Definir o formato desejado ao serializar para JSON

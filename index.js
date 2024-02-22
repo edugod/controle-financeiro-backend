@@ -12,9 +12,9 @@ const app = express();
 
 // Middleware
 app.use(cors());
+app.use(requestLogger); // Adicione o middleware de logger aqui
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(requestLogger); // Adicione o middleware de logger aqui
 
 // Conectar ao MongoDB
 mongoose
