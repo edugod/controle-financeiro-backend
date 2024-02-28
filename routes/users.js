@@ -36,7 +36,8 @@ router.post('/login', async (req, res) => {
 		const { username, password } = req.body
 		const user = await User.findOne({ username })
 		if (!user) {
-			return res.status(404).json({ error: 'Usuário não encontrado' })
+			return res.status(400).json({ error: 'Usuário não encontrado' })
+      //alterado status para 400, pq o 404 que estava, não é captado como um catch.
 		}
 		const validPassword = await bcrypt.compare(password, user.password)
 		if (!validPassword) {
