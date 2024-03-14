@@ -24,6 +24,7 @@ router.post('/', async (request, response) => {
 			valor: request.body.valor,
 			observacao: request.body.observacao,
 			categoria: request.body.categoria,
+			createdBy: request.body.createdBy
 		})
 
 		// Salvar a nova despesa no banco de dados
