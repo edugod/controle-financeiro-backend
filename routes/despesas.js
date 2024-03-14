@@ -6,7 +6,7 @@ const router = express.Router()
 // Rota para obter todas as despesas
 router.get('/', async (request, response) => {
 	try {
-		const despesas = await Despesa.find({})
+        const despesas = await Despesa.find().populate('createdBy');
 		response.setHeader('Content-Type', 'application/json')
 		response.json(despesas)
 	} catch (error) {
